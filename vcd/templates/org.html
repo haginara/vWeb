@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block body %}
+<form action="#" method="POST" class="form-inline"> {% csrf_token %}
+    <div class="form-group">
+        {% bootstrap_form form show_label=False class="form-control"%}
+    </div>
+    {% buttons %}
+        <input type="submit" value="submit" class="btn btn-primary btn-block">
+    {% endbuttons %}
+</form>
+<table class="table">
+    <tr>
+        <th>ORG</th>
+        <th>org href</th>
+    </tr>
+    {% for org in orgs %}
+        <tr>
+            <td><a href="/vcd/{{org.org}}">{{ org.org }}</a></td>
+            <td>{{ org.url }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

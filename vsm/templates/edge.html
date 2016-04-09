@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block body %}
+<h3>Firewall Rules: {{edge.name}}</h3>
+<form action="#" method="POST" class="form-inline"> {% csrf_token %}
+    <div class="form-group">
+        {% bootstrap_form form show_label=False class="form-control"%}
+    </div>
+    {% buttons %}
+        <input type="submit" value="submit" class="btn btn-primary btn-block">
+    {% endbuttons %}
+</form>
+
+<table class="table table-hover">
+    {% for fw in firewalls %}
+        <tr class="success">
+            <th>name</th>
+            <td class="text-left">{{fw.name}}</td>
+        </tr>
+        <tr>
+            <th>source</th>
+            <td class="text-left">
+                {% for src in fw.source %}
+                    {% if src.name %}
+                        {{ src.name }}({{src.scope.name}}): {{src.value}}<br>
+                    {% else %}
+                        {{src}}<br>
+                    {% endif %}
+                {% endfor %}
+            <td>
+        </tr>
+        <tr>
+            <th>destination</th>
+            <td align="left">
+                {% for dst in fw.destination %}
+                    {% if dst.name %}
+                        {{dst.name}}({{dst.scope.name}}): {{dst.value}}<br>
+                    {% else %}
+                        {{src}}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>application</th>
+            <td align="left">
+                {% for app in fw.application %}
+                    {% if app.name %}
+                        {{app.name}}: {{app.element.applicationProtocol}}/{{app.element.value}}<br>
+                    {% else %}
+                        {{app}}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Action</th>
+            <td align="left">{{fw.action}}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td align="left">{{fw.description}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

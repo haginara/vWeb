@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block body %}
+
+{% if form.errors %}
+<p>Your Username and password didn't match. Please try again</p>
+{% endif %}
+{{ form.non_field_errors }}
+
+<form action="/vcd/login" method="POST" class="col-md-12"> {% csrf_token %}
+    {% bootstrap_form form show_label=False horizontal_field_class="col-md-12"%}
+    <div class="row">
+    {% buttons %}
+        <input type="submit" value="submit" class="btn btn-primary btn-block">
+    {% endbuttons %}
+
+</div>
+</form>
+
+{% endblock %}

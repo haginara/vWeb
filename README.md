@@ -16,5 +16,5 @@ Add vShield(vsm) and vCloud Director(vcd) url to settings.py file.
 
 ```
 vshield_url = 'https://vcd.com/api'
-vcd_url = "https://vshild.com/api"
+vcd_url = "https://vshield.com/api"
 ```
